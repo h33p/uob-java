@@ -1,2 +1,6 @@
 bin/*
 *.class
+*.zip
+wafers/*
+waferlog.txt
+temp/*

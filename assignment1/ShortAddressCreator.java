@@ -17,10 +17,13 @@ public class ShortAddressCreator {
 		if (input == null)
 			return null;
 
-		String[] parts = input.split(", ");
+		String[] parts = input.split(",");
 
 		if (parts.length < 2)
 			return null;
+
+		for (int i = 0; i < parts.length; i++)
+			parts[i] = parts[i].trim();
 
 		String postcode = parts[parts.length - 1];
 		int plen = postcode.length();

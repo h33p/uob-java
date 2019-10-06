@@ -11,6 +11,8 @@ public class FullIDCreator {
 		FullIDCreator instance = new FullIDCreator();
 		Scanner in = new Scanner(System.in);
 
+		System.out.println("Enter student names.");
+
 		while (true) {
 			String input = in.nextLine();
 			String fullID = instance.createFullID(input);

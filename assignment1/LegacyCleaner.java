@@ -7,6 +7,8 @@ public class LegacyCleaner {
 		LegacyCleaner instance = new LegacyCleaner();
 		Scanner in = new Scanner(System.in);
 
+		System.out.println("Enter the legacy data.");
+
 		while (true) {
 			String line = in.nextLine();
 			String[] cleaned = instance.clean(line);
