@@ -37,7 +37,7 @@ public class LegacyCleaner {
 
 			if (ret[0] == null && isName(str))
 				ret[0] = str;
-			else if (ret[1] == null && checkMask(str, "aaadddd".toCharArray()))
+			else if (ret[1] == null && isID(str))
 				ret[1] = str;
 			else if (ret[2] == null && isResult(str))
 				ret[2] = str;
@@ -71,6 +71,23 @@ public class LegacyCleaner {
 		return slen != 0;
 	}
 
+	private boolean isID(String str) {
+		//This would be more correct, but the assumptions do not state that the characters have to be arranged this way
+		//return checkMask(str, "aaadddd".toCharArray());
+		int slen = str.length();
+
+		if (slen != 7)
+			return false;
+	
+		for (int i = 0; i < slen; i++) {
+			char sc = str.charAt(i);
+			if (!Character.isDigit(sc) && !Character.isLetter(sc))
+				return false;
+		}
+
+		return true;
+	}
+
 	private boolean checkMask(String str, char[] mask) {
 		if (str.length() != mask.length)
 			return false;
@@ -93,7 +110,7 @@ public class LegacyCleaner {
 	private boolean isAddress(String str) {
 		int slen = str.length();
 
-		if (isResult(str))
+		if (isResult(str) || slen != 6)
 			return false;
 
 		for (int i = 0; i < slen; i++) {
@@ -102,7 +119,7 @@ public class LegacyCleaner {
 				return false;
 		}
 
-		return slen != 0;
+		return true;
 	}
 }
 
