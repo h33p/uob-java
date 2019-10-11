@@ -37,8 +37,6 @@ public class FullIDCreator {
 			index += shortID.charAt(i) - 'a';
 		}
 
-		System.out.println(index);
-
 		return String.format("%s%04d", shortID, counts[index]++);
 	}
 }
