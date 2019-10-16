@@ -3,5 +3,5 @@
 DIR=$1
 FILE=$2
 
-javac -classpath bin/ -d bin $DIR/$FILE.java
+./compile.sh $DIR $FILE
 java -classpath bin/ com.bham.pij.assignments.$(echo "$FILE" | tr '[:upper:]' '[:lower:]').$FILE
