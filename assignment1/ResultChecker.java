@@ -32,6 +32,9 @@ public class ResultChecker {
 			if (!gc.isPass(grades[i]))
 				return "FAIL";
 
+		if (projectGrade < 40)
+			return "FAIL";
+
 		if (meanGrade < 50 || projectGrade < 50)
 			return "PASS";
 

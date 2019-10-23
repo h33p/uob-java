@@ -27,7 +27,7 @@ public class FullIDCreator {
 	public String createFullID(String input) {
 		String shortID = new ShortIDCreator().createID(input);
 
-		if (input == null)
+		if (shortID == null)
 			return null;
 
 		int index = 0;

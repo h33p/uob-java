@@ -4,3 +4,4 @@ bin/*
 wafers/*
 waferlog.txt
 temp/*
+*.pdf

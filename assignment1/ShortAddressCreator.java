@@ -17,6 +17,7 @@ public class ShortAddressCreator {
 		if (input == null)
 			return null;
 
+		/* BUG: we need to add whitespace checking after the comma */
 		String[] parts = input.split(",");
 
 		if (parts.length < 2)
