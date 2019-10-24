@@ -46,7 +46,20 @@ public class TweetGenerator {
 
 	public String createTweet(int numWords) {
 		String ret = null;
-		ArrayList<Word> wordList = findWords(words);
+
+		int randIdx = random.nextInt(words.size() - 1);
+		Word curWord = words.get(randIdx);
+
+		for (int i = 0; i < numWords; i++) {
+			//Handle null pointer
+			while (curWord == null && words.size() > 1)
+				curWord = words.get(random.nextInt(words.size() - 1));
+			if (ret == null)
+				ret = curWord.getWord();
+			else
+				ret += " " + curWord.getWord();
+			curWord = getWord(curWord.getRandomFollower());
+		}
 
 		return ret;
 	}
@@ -61,21 +74,27 @@ public class TweetGenerator {
 	}
 
 	public ArrayList<Word> findWords(ArrayList<String> cleaned) {
-		Hashtable<String, Word> wordTable = new Hashtable<String, Word>();
-		String prevWord = null;
+		Hashtable<String, Integer> wordIndexTable = new Hashtable<String, Integer>();
+		ArrayList<Word> retList = new ArrayList<Word>();
+		int prevWordIndex = -1;
 
 		for (String word : cleaned) {
-			word = word.toLowerCase();
-			Word wordObject = wordTable.get(word);
+			String wordLC = word.toLowerCase();
+			Integer wordIndex = wordIndexTable.get(wordLC);
 
-			if (wordObject == null)
-				wordObject = new Word(word);
+			if (wordIndex == null) {
+				retList.add(new Word(word));
+				wordIndex = Integer.valueOf(retList.size() - 1);
+				wordIndexTable.put(wordLC, wordIndex);
+			}
 
-			wordTable.put(word, wordObject);
+			Word wordObject = retList.get(wordIndex.intValue());
+			wordObject.incrementFrequency();
+			retList.set(wordIndex.intValue(), wordObject);
 
 			//Add a follower to the previous word
-			if (prevWord != null) {
-				Word prevWordObject = wordTable.get(word);
+			if (prevWordIndex >= 0) {
+				Word prevWordObject = retList.get(prevWordIndex);
 				/*
 				 * We would run this check if we used the default implementation of Word class.
 				 * The behavior of duplicate entries was not defined in the default implementation.
@@ -84,17 +103,11 @@ public class TweetGenerator {
 				*/
 				//if (!prevWordObject.followerExists(word))
 				prevWordObject.addFollower(word);
-				wordTable.put(prevWord, prevWordObject);
+				retList.set(prevWordIndex, prevWordObject);
 			}
 
-			prevWord = word;
+			prevWordIndex = wordIndex.intValue();
 		}
-
-		//Create an arrayList
-		ArrayList<Word> retList = new ArrayList<Word>();
-
-		for (Map.Entry<String, Word> wordEntry : wordTable.entrySet())
-			retList.add(wordEntry.getValue());
 
 		return retList;
 	}    

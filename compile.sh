@@ -7,4 +7,4 @@ if [[ ! -d bin ]]; then
 	mkdir bin
 fi
 
-javac -classpath bin/ -d bin $DIR/$FILE.java
+javac -Xlint:deprecation -classpath bin/ -d bin $DIR/$FILE.java

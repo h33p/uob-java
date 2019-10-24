@@ -87,14 +87,8 @@ public class TweetCleaner {
 		//Clean the punctuation
 		if (input.length() == 1) {
 			switch (input.charAt(0)) {
-				case ',':
-				case ':':
-				case ';':
-				case '.':
 				case '?':
 				case '!':
-				case '(':
-				case ')':
 					return null;
 			}
 		}
@@ -108,6 +102,7 @@ public class TweetCleaner {
 				case '.':
 				case '(':
 				case ')':
+				case '"':
 					return doClean(input.substring(0, i) + input.substring(i + 1, input.length()));
 			}
 		}

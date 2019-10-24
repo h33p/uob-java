@@ -3,6 +3,7 @@ package com.bham.pij.assignments.twit;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Hashtable;
+import java.util.Map;
 
 public class Word {
 	
@@ -21,9 +22,9 @@ public class Word {
 	*/
 	private ArrayList<String> followers;
 	/**
-	 * A table of words objects that follow this word in the text. 
+	 * A table of word frequencies that follow this word in the text. 
 	 */
-	private Hashtable<String, Word> followersTable;
+	private Hashtable<String, Integer> followersTable;
 	/**
 	 * A random number generator.
 	 */
@@ -36,7 +37,7 @@ public class Word {
 	public Word(String word) {
 		this.word = word;
 		followers = new ArrayList<String>();
-		followersTable = new Hashtable<String, Word>();
+		followersTable = new Hashtable<String, Integer>();
 	}
 	
 	/**
@@ -46,18 +47,18 @@ public class Word {
 	 * @param follower The word that follows this word in the text.
 	 */
 	public void addFollower(String follower) {
-		follower = follower.toLowerCase();
+		String followerLC = follower.toLowerCase();
 
-		Word followWord = followersTable.get(follower);
+		Integer followWord = followersTable.get(followerLC);
 
 		if (followWord == null) {
-			followWord = new Word(follower);
+			followWord = Integer.valueOf(0);
 			followers.add(follower);
 		}
 
-		followWord.incrementFrequency();
+		followWord = Integer.valueOf(followWord.intValue() + 1);
 
-		followersTable.put(follower, followWord);
+		followersTable.put(followerLC, followWord);
 	}
 	
 	/**
@@ -91,10 +92,22 @@ public class Word {
 		if (followers.size() == 1) {
 			return followers.get(0);
 		}
+
+		int totalFreqs = 0;
+
+		for (Map.Entry<String, Integer> freqEntry : followersTable.entrySet()) {
+			totalFreqs += freqEntry.getValue().intValue();
+		}
 		
-		int r = rand.nextInt(followers.size()-1);
+		int r = rand.nextInt(totalFreqs-1);
 		
-		return followers.get(r);
+		for (Map.Entry<String, Integer> freqEntry : followersTable.entrySet()) {
+			r -= freqEntry.getValue().intValue();
+			if (r <= 0)
+				return freqEntry.getKey();
+		}
+
+		return null;
 	}
 
 	/**
