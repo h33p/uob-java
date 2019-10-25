@@ -89,6 +89,7 @@ public class TweetCleaner {
 			switch (input.charAt(0)) {
 				case '?':
 				case '!':
+				case '\'':
 					return null;
 			}
 		}

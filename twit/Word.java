@@ -5,6 +5,10 @@ import java.util.Random;
 import java.util.Hashtable;
 import java.util.Map;
 
+/*
+ * This class was modified to have a more realistic tweet generation.
+*/
+
 public class Word {
 	
 	/**
