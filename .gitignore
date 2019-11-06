@@ -4,4 +4,6 @@ bin/*
 wafers/*
 waferlog.txt
 temp/*
+ignored/*
 *.pdf
+*.swp
