@@ -25,8 +25,9 @@ public class Deck {
 	}
 
 	public Card dealCard(int i) {
-		if (dealtStatus[i])
+		if (dealtStatus[i]) {
 			return null;
+		}
 
 		dealtStatus[i] = true;
 		return getCard(i);
@@ -41,8 +42,9 @@ public class Deck {
 	}
 
 	public void reset() {
-		for (int i = 0; i < DECK_SIZE; i++)
+		for (int i = 0; i < DECK_SIZE; i++) {
 			dealtStatus[i] = false;
+		}
 	}
 }
 

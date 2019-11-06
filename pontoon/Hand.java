@@ -56,10 +56,11 @@ public class Hand {
 		String ret = null;
 
 		for (int i = 0; i < getHandSize(); i++) {
-			if (ret == null)
+			if (ret == null) {
 				ret = "";
-			else
+			} else {
 				ret += "; ";
+			}
 			ret += getCard(i).toString();
 		}
 
