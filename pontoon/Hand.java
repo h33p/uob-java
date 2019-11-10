@@ -64,7 +64,7 @@ public class Hand {
 			ret += getCard(i).toString();
 		}
 
-		return ret;
+		return ret != null ? ret : "Empty";
 	}
 }
 
