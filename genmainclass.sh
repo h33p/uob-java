@@ -9,7 +9,9 @@ if [[ ! -f $DIR/$ASSIGNMENT.java ]]; then
 	echo "package com.bham.pij.assignments.$ASSIGNMENT_LC;
 
 public class $ASSIGNMENT {
-
+	public static void main(String[] args) {
+		$ASSIGNMENT instance = new $ASSIGNMENT();
+	}
 }
 " >> $DIR/$ASSIGNMENT.java
 
