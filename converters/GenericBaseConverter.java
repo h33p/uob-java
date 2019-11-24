@@ -58,7 +58,7 @@ public class GenericBaseConverter implements IConverter {
 			num += idx;
 		}
 
-		//Prevent overflow (for example: prevents number 256 passing through when the output string only supports 8 bits)
+		//Prevent overflow (for example: prevents number 256 passing through when the output format only supports 8 bit numbers)
 		if (num >= maxNumericalValue)
 			throw new InvalidFormatException();
 
